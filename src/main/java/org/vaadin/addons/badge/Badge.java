@@ -1,13 +1,10 @@
 package org.vaadin.addons.badge;
 
-import com.vaadin.flow.component.Composite;
-import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dependency.JavaScript;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 
 /**
  * This is the Badge component that implements Java API for Lumo Badges.
@@ -16,8 +13,9 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
  * @author Tatu Lund
  */
 @JsModule("@vaadin/vaadin-lumo-styles/badge.js")
-@CssImport(value = "./styles/empty.css", include = "lumo-badge")
-public class Badge extends Composite<Span> {
+@JsModule("./badge.ts")
+@Tag("tatus-badge")
+public class Badge extends Component {
 
 	/**
 	 * Badge variants  
@@ -41,7 +39,7 @@ public class Badge extends Composite<Span> {
         CONTRAST("contrast");
 
         private String variant;
-
+        
         BadgeVariant(String variant) {
             this.variant = variant;
         }
@@ -51,11 +49,10 @@ public class Badge extends Composite<Span> {
         }
     }
 	
-    private Span span = new Span();
 	private String text = "";
 	
     public Badge() {
-        span.getElement().getThemeList().add("badge");
+        getElement().getThemeList().add("badge");
     }
     
     public Badge(String text) {
@@ -70,7 +67,7 @@ public class Badge extends Composite<Span> {
      */
     public void setText(String text) {
     	this.text = text;
-    	span.setText(text);
+    	getElement().setText(text);
     }
 
     /**
@@ -146,16 +143,15 @@ public class Badge extends Composite<Span> {
     public void setIcon(Icon icon, boolean first) {
     	getElement().removeAllChildren();
     	if (first) {
-        	span.add(icon);
-        	span.add(new Span(text));
+        	add(icon);
+        	add(new Span(text));
     	} else {
-        	span.add(new Span(text));
-        	span.add(icon);    		
+        	add(new Span(text));
+        	add(icon);    		
     	}
     }
-
-    @Override
-	protected Span initContent() {
-    	return span;
+    
+    void add(Component comp) {
+    	getElement().appendChild(comp.getElement());
     }
 }

@@ -1,13 +1,11 @@
 package org.vaadin.addons.badge;
 
-import org.vaadin.addons.badge.Badge;
 import org.vaadin.addons.badge.Badge.BadgeVariant;
 
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.IronIcon;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.page.AppShellConfigurator;
 import com.vaadin.flow.router.Route;
 
 /**
@@ -15,7 +13,7 @@ import com.vaadin.flow.router.Route;
  * test folder will not be included in the final JAR.
  */
 @Route("")
-public class TestView extends VerticalLayout {
+public class TestView extends VerticalLayout implements AppShellConfigurator {
 
     public TestView() {
     	add(createBadges("",false));
