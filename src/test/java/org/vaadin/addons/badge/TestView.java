@@ -43,7 +43,7 @@ public class TestView extends VerticalLayout implements AppShellConfigurator {
             Badge badge = new Badge();
             if (html != null) {
                 badge.setHtml(
-                        "<span style='font-weight: 700;'>" + html + "</span>");
+                        "<div style='font-weight: 700;'>" + html + "</div>");
             } else {
                 badge.setText("text");
             }

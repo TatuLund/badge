@@ -1,7 +1,7 @@
 import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 import { badge } from '@vaadin/vaadin-lumo-styles/badge.js';
-import { css, unsafeCSS, html, LitElement, } from 'lit';
-import { customElement } from 'lit/decorators';
+import { html, LitElement, } from 'lit';
+import { customElement } from 'lit/decorators.js';
 
 @customElement('tatus-badge')
 export class Badge extends ThemableMixin(LitElement) {

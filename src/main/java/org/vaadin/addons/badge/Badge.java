@@ -1,6 +1,7 @@
 package org.vaadin.addons.badge;
 
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.HasTheme;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.dependency.JsModule;
@@ -16,7 +17,7 @@ import com.vaadin.flow.component.icon.Icon;
 @JsModule("@vaadin/vaadin-lumo-styles/badge.js")
 @JsModule("./badge.ts")
 @Tag("tatus-badge")
-public class Badge extends Component {
+public class Badge extends Component implements HasTheme {
 
     /**
      * Badge variants
@@ -56,7 +57,7 @@ public class Badge extends Component {
     private String html;
 
     public Badge() {
-        getElement().getThemeList().add("badge");
+        addThemeName("badge");
     }
 
     public Badge(String text) {
@@ -84,10 +85,10 @@ public class Badge extends Component {
     public void setVariant(BadgeVariant variant) {
         for (BadgeVariant v : BadgeVariant.values()) {
             if (v.getVariant() != null)
-                getElement().getThemeList().remove(v.getVariant());
+                removeThemeName(v.getVariant());
         }
         if (variant != BadgeVariant.NORMAL) {
-            getElement().getThemeList().add(variant.getVariant());
+            addThemeName(variant.getVariant());
         }
     }
 
@@ -99,9 +100,9 @@ public class Badge extends Component {
      */
     public void setPrimary(boolean primary) {
         if (primary) {
-            getElement().getThemeList().add("primary");
+            addThemeName("primary");
         } else {
-            getElement().getThemeList().remove("primary");
+            removeThemeName("primary");
         }
     }
 
@@ -113,9 +114,9 @@ public class Badge extends Component {
      */
     public void setPill(boolean pill) {
         if (pill) {
-            getElement().getThemeList().add("pill");
+            addThemeName("pill");
         } else {
-            getElement().getThemeList().remove("pill");
+            removeThemeName("pill");
         }
     }
 
@@ -127,9 +128,9 @@ public class Badge extends Component {
      */
     public void setSmall(boolean small) {
         if (small) {
-            getElement().getThemeList().add("small");
+            addThemeName("small");
         } else {
-            getElement().getThemeList().remove("small");
+            removeThemeName("small");
         }
     }
 
