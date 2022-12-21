@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.openqa.selenium.interactions.Actions;
 
 import com.vaadin.flow.component.html.testbench.DivElement;
 import com.vaadin.flow.component.html.testbench.SpanElement;
@@ -17,7 +18,7 @@ public class BadgeIT extends AbstractViewTest {
         super.setup();
 
         // Hide dev mode gizmo, it would interfere screenshot tests
-        $("vaadin-devmode-gizmo").first().setProperty("hidden", true);
+        $("vaadin-dev-tools").first().setProperty("hidden", true);
     }
 
     @Test
@@ -51,6 +52,16 @@ public class BadgeIT extends AbstractViewTest {
         DivElement htmlDiv = badge.$(DivElement.class).first();
         Assert.assertEquals("bold",htmlDiv.getText());
         Assert.assertEquals("700",htmlDiv.getCssValue("font-weight"));
+    }
+
+    @Test
+    public void tooltipWorks() {
+        BadgeElement badge = $(BadgeElement.class).first();
+        Actions action = new Actions(getDriver());
+        action.moveToElement(badge).perform();
+        TestBenchElement tooltip = $("vaadin-tooltip-overlay").first();
+        Assert.assertEquals("Correct tooltip was not found",
+                "normal text", tooltip.getText());
     }
 
     @Test

@@ -4,9 +4,11 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasTheme;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Tag;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.shared.HasTooltip;
 
 /**
  * This is the Badge component that implements Java API for Lumo Badges.
@@ -17,7 +19,7 @@ import com.vaadin.flow.component.icon.Icon;
 @JsModule("@vaadin/vaadin-lumo-styles/badge.js")
 @JsModule("./badge.ts")
 @Tag("tatus-badge")
-public class Badge extends Component implements HasTheme {
+public class Badge extends Component implements HasTheme, HasTooltip {
 
     /**
      * Badge variants
@@ -73,7 +75,7 @@ public class Badge extends Component implements HasTheme {
      */
     public void setText(String text) {
         this.text = text;
-        getElement().setText(text);
+        add(new Span(text));
     }
 
     /**
@@ -194,6 +196,7 @@ public class Badge extends Component implements HasTheme {
     }
 
     void add(Component comp) {
+        comp.getElement().setAttribute("slot", "content");
         getElement().appendChild(comp.getElement());
     }
 }

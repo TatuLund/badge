@@ -45,7 +45,8 @@ public class TestView extends VerticalLayout implements AppShellConfigurator {
                 badge.setHtml(
                         "<div style='font-weight: 700;'>" + html + "</div>");
             } else {
-                badge.setText("text");
+                html = "text";
+                badge.setText(html);
             }
             badge.setVariant(variant);
             if (icon) {
@@ -74,6 +75,11 @@ public class TestView extends VerticalLayout implements AppShellConfigurator {
             }
             }
             layout.add(badge);
+            String text = variant.toString().toLowerCase() +" "+type+" "+html;
+            if (icon) {
+                text += " icon";
+            }
+            badge.setTooltipText(text);
         }
         return layout;
     }
