@@ -1,11 +1,15 @@
 import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
 import { badge } from '@vaadin/vaadin-lumo-styles/badge.js';
 import { html, LitElement, } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { customElement, property } from 'lit/decorators.js';
+import { ControllerMixin } from '@vaadin/component-base/src/controller-mixin.js';
 import { TooltipController } from '@vaadin/component-base/src/tooltip-controller.js';
 
 @customElement('tatus-badge')
-export class Badge extends ThemableMixin(LitElement) {
+export class Badge extends ThemableMixin(ControllerMixin(LitElement)) {
+
+  @property()
+  theme : string | null = null;
 
   static get is() {
     return 'tatus-badge';
@@ -22,7 +26,8 @@ export class Badge extends ThemableMixin(LitElement) {
     this.addController(this._tooltipController);
   }
 
-  _setTheme(theme : string) {
+  _set_theme(theme : string) {
+	 this.theme = theme;
   }
 
   render() {
