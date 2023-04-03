@@ -2,11 +2,10 @@ import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mix
 import { badge } from '@vaadin/vaadin-lumo-styles/badge.js';
 import { html, LitElement, } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { ControllerMixin } from '@vaadin/component-base/src/controller-mixin.js';
 import { TooltipController } from '@vaadin/component-base/src/tooltip-controller.js';
 
 @customElement('tatus-badge')
-export class Badge extends ThemableMixin(ControllerMixin(LitElement)) {
+export class Badge extends ThemableMixin(LitElement) {
 
   @property()
   theme : string | null = null;
