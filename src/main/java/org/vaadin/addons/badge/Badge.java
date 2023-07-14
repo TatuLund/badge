@@ -38,6 +38,10 @@ public class Badge extends Component implements HasTheme, HasTooltip {
          */
         ERROR("error"),
         /**
+         * Error type, usually orange,  (requires Vaadin 24.1+)
+         */
+        WARNING("warning"),
+        /**
          * Contrast type, usually black
          */
         CONTRAST("contrast");

@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.vaadin.addons.badge.Badge.BadgeVariant;
 
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.dom.ThemeList;
 
 public class BadgeTest {
@@ -18,7 +19,7 @@ public class BadgeTest {
         badge.setPill(true);
         themeNames = badge.getThemeNames();
         Assert.assertTrue(themeNames.contains("pill"));
-        Assert.assertEquals(size+1,themeNames.size());
+        Assert.assertEquals(size + 1, themeNames.size());
         badge.setPill(false);
         themeNames = badge.getThemeNames();
         Assert.assertFalse(themeNames.contains("pill"));
@@ -34,7 +35,7 @@ public class BadgeTest {
         badge.setPrimary(true);
         themeNames = badge.getThemeNames();
         Assert.assertTrue(themeNames.contains("primary"));
-        Assert.assertEquals(size+1,themeNames.size());
+        Assert.assertEquals(size + 1, themeNames.size());
         badge.setPrimary(false);
         themeNames = badge.getThemeNames();
         Assert.assertFalse(themeNames.contains("primary"));
@@ -50,12 +51,11 @@ public class BadgeTest {
         badge.setSmall(true);
         themeNames = badge.getThemeNames();
         Assert.assertTrue(themeNames.contains("small"));
-        Assert.assertEquals(size+1,themeNames.size());
+        Assert.assertEquals(size + 1, themeNames.size());
         badge.setSmall(false);
         themeNames = badge.getThemeNames();
         Assert.assertFalse(themeNames.contains("small"));
     }
-
 
     @Test
     public void setVariant_setSmall_setPrimary() {
@@ -68,7 +68,7 @@ public class BadgeTest {
         themeNames = badge.getThemeNames();
         Assert.assertTrue(themeNames.contains("small"));
         Assert.assertTrue(themeNames.contains("primary"));
-        Assert.assertEquals(size+2,themeNames.size());
+        Assert.assertEquals(size + 2, themeNames.size());
         badge.setPrimary(false);
         themeNames = badge.getThemeNames();
         Assert.assertFalse(themeNames.contains("primary"));
@@ -86,7 +86,7 @@ public class BadgeTest {
         themeNames = badge.getThemeNames();
         Assert.assertTrue(themeNames.contains("small"));
         Assert.assertTrue(themeNames.contains("pill"));
-        Assert.assertEquals(size+2,themeNames.size());
+        Assert.assertEquals(size + 2, themeNames.size());
         badge.setPill(false);
         themeNames = badge.getThemeNames();
         Assert.assertFalse(themeNames.contains("pill"));
@@ -118,4 +118,50 @@ public class BadgeTest {
         Assert.assertTrue(themeNames.contains("small"));
     }
 
+    @Test
+    public void setText() {
+        Badge badge = new Badge();
+        badge.setText("Badge");
+        Assert.assertEquals(1, badge.getElement().getChildren().count());
+        Assert.assertEquals("Badge", badge.getElement().getChild(0).getText());
+        badge.setText("Text");
+        Assert.assertEquals(1, badge.getElement().getChildren().count());
+        Assert.assertEquals("Text", badge.getElement().getChild(0).getText());
+    }
+
+    @Test
+    public void setHtml() {
+        Badge badge = new Badge();
+        badge.setText("<span><b>Html</b></span>");
+        Assert.assertEquals(1, badge.getElement().getChildren().count());
+        Assert.assertEquals(
+                "<span slot=\"content\">&lt;span&gt;&lt;b&gt;Html&lt;/b&gt;&lt;/span&gt;</span>",
+                badge.getElement().getChild(0).getOuterHTML());
+        badge.setText("<span><i>Html</i></span>");
+        Assert.assertEquals(1, badge.getElement().getChildren().count());
+        Assert.assertEquals(
+                "<span slot=\"content\">&lt;span&gt;&lt;i&gt;Html&lt;/i&gt;&lt;/span&gt;</span>",
+                badge.getElement().getChild(0).getOuterHTML());
+    }
+
+    @Test
+    public void setIcon() {
+        Badge badge = new Badge("Badge");
+        badge.setIcon(VaadinIcon.VAADIN_H.create());
+        Assert.assertEquals(2, badge.getElement().getChildren().count());
+        Assert.assertEquals("Badge", badge.getElement().getChild(1).getText());
+        Assert.assertEquals(
+                "<vaadin-icon icon=\"vaadin:vaadin-h\" slot=\"content\"></vaadin-icon>",
+                badge.getElement().getChild(0).getOuterHTML());
+        badge.setIcon(VaadinIcon.VAADIN_V.create());
+        Assert.assertEquals(
+                "<vaadin-icon icon=\"vaadin:vaadin-v\" slot=\"content\"></vaadin-icon>",
+                badge.getElement().getChild(0).getOuterHTML());
+    }
+
+    @Test
+    public void basic() {
+        Badge badge = new Badge();
+        Assert.assertTrue(badge.getElement().getThemeList().contains("badge"));
+    }
 }
