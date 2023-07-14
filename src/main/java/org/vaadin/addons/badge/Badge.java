@@ -38,7 +38,7 @@ public class Badge extends Component implements HasTheme, HasTooltip {
          */
         ERROR("error"),
         /**
-         * Error type, usually orange,  (requires Vaadin 24.1+)
+         * Error type, usually orange, (requires Vaadin 24.1+)
          */
         WARNING("warning"),
         /**
@@ -181,7 +181,8 @@ public class Badge extends Component implements HasTheme, HasTooltip {
     }
 
     /**
-     * Set the text content of the badge as html, remove all other content.
+     * Set the text content of the badge as html, remove previous text or html,
+     * but preserve icon.
      * <p>
      * Note: Use carefully, html is not sanitized.
      * 

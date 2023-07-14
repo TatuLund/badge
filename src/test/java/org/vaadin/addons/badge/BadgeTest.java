@@ -132,20 +132,18 @@ public class BadgeTest {
     @Test
     public void setHtml() {
         Badge badge = new Badge();
-        badge.setText("<span><b>Html</b></span>");
+        badge.setHtml("<span><b>Html</b></span>");
         Assert.assertEquals(1, badge.getElement().getChildren().count());
-        Assert.assertEquals(
-                "<span slot=\"content\">&lt;span&gt;&lt;b&gt;Html&lt;/b&gt;&lt;/span&gt;</span>",
+        Assert.assertEquals("<span slot=\"content\"><b>Html</b></span>",
                 badge.getElement().getChild(0).getOuterHTML());
-        badge.setText("<span><i>Html</i></span>");
+        badge.setHtml("<span><i>Html</i></span>");
         Assert.assertEquals(1, badge.getElement().getChildren().count());
-        Assert.assertEquals(
-                "<span slot=\"content\">&lt;span&gt;&lt;i&gt;Html&lt;/i&gt;&lt;/span&gt;</span>",
+        Assert.assertEquals("<span slot=\"content\"><i>Html</i></span>",
                 badge.getElement().getChild(0).getOuterHTML());
     }
 
     @Test
-    public void setIcon() {
+    public void setIcon_before() {
         Badge badge = new Badge("Badge");
         badge.setIcon(VaadinIcon.VAADIN_H.create());
         Assert.assertEquals(2, badge.getElement().getChildren().count());
@@ -154,9 +152,60 @@ public class BadgeTest {
                 "<vaadin-icon icon=\"vaadin:vaadin-h\" slot=\"content\"></vaadin-icon>",
                 badge.getElement().getChild(0).getOuterHTML());
         badge.setIcon(VaadinIcon.VAADIN_V.create());
+        Assert.assertEquals(2, badge.getElement().getChildren().count());
         Assert.assertEquals(
                 "<vaadin-icon icon=\"vaadin:vaadin-v\" slot=\"content\"></vaadin-icon>",
                 badge.getElement().getChild(0).getOuterHTML());
+        badge.setText("Text");
+        Assert.assertEquals(1, badge.getElement().getChildren().count());
+        Assert.assertEquals("Text", badge.getElement().getChild(0).getText());
+    }
+
+    @Test
+    public void setIcon_after_before() {
+        Badge badge = new Badge("Badge");
+        badge.setIcon(VaadinIcon.VAADIN_H.create(), false);
+        Assert.assertEquals(2, badge.getElement().getChildren().count());
+        Assert.assertEquals("Badge", badge.getElement().getChild(0).getText());
+        Assert.assertEquals(
+                "<vaadin-icon icon=\"vaadin:vaadin-h\" slot=\"content\"></vaadin-icon>",
+                badge.getElement().getChild(1).getOuterHTML());
+        badge.setIcon(VaadinIcon.VAADIN_V.create());
+        Assert.assertEquals(2, badge.getElement().getChildren().count());
+        Assert.assertEquals("Badge", badge.getElement().getChild(1).getText());
+        Assert.assertEquals(
+                "<vaadin-icon icon=\"vaadin:vaadin-v\" slot=\"content\"></vaadin-icon>",
+                badge.getElement().getChild(0).getOuterHTML());
+        badge.setText("Text");
+        Assert.assertEquals(1, badge.getElement().getChildren().count());
+        Assert.assertEquals("Text", badge.getElement().getChild(0).getText());
+    }
+
+    @Test
+    public void setIcon_html_after_before() {
+        Badge badge = new Badge();
+        badge.setHtml("<span>Badge</span");
+        badge.setIcon(VaadinIcon.VAADIN_H.create(), false);
+        Assert.assertEquals(2, badge.getElement().getChildren().count());
+        Assert.assertEquals("<span slot=\"content\">Badge</span>",
+                badge.getElement().getChild(0).getOuterHTML());
+        Assert.assertEquals(
+                "<vaadin-icon icon=\"vaadin:vaadin-h\" slot=\"content\"></vaadin-icon>",
+                badge.getElement().getChild(1).getOuterHTML());
+        badge.setIcon(VaadinIcon.VAADIN_V.create());
+        Assert.assertEquals(2, badge.getElement().getChildren().count());
+        Assert.assertEquals("<span slot=\"content\">Badge</span>",
+                badge.getElement().getChild(1).getOuterHTML());
+        Assert.assertEquals(
+                "<vaadin-icon icon=\"vaadin:vaadin-v\" slot=\"content\"></vaadin-icon>",
+                badge.getElement().getChild(0).getOuterHTML());
+        badge.setHtml("<span>Text</span>");
+        Assert.assertEquals(2, badge.getElement().getChildren().count());
+        Assert.assertEquals("<span slot=\"content\">Text</span>",
+                badge.getElement().getChild(0).getOuterHTML());
+        Assert.assertEquals(
+                "<vaadin-icon icon=\"vaadin:vaadin-v\" slot=\"content\"></vaadin-icon>",
+                badge.getElement().getChild(1).getOuterHTML());
     }
 
     @Test
