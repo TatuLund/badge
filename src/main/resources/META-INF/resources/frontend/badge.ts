@@ -31,7 +31,7 @@ export class Badge extends ThemableMixin(LitElement) {
 
   render() {
 	return html`
-		<span theme='${this.theme}' part='badge'>
+		<span theme='badge ${this.theme}' part='badge'>
 			<slot name='content'></slot>
 		</span>
 		<slot name='tooltip''></slot>

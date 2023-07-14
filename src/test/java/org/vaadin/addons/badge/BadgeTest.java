@@ -209,8 +209,10 @@ public class BadgeTest {
     }
 
     @Test
-    public void basic() {
+    public void padding() {
         Badge badge = new Badge();
+        Assert.assertFalse(badge.getElement().getThemeList().contains("badge"));
+        badge.setPadding(true);
         Assert.assertTrue(badge.getElement().getThemeList().contains("badge"));
     }
 }

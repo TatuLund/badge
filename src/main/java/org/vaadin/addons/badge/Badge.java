@@ -63,7 +63,6 @@ public class Badge extends Component implements HasTheme, HasTooltip {
     private String html;
 
     public Badge() {
-        addThemeName("badge");
     }
 
     public Badge(String text) {
@@ -198,6 +197,22 @@ public class Badge extends Component implements HasTheme, HasTooltip {
         add(new Html(html));
         if (icon != null) {
             add(icon);
+        }
+    }
+
+    /**
+     * If true, add paler padding in the badge
+     * 
+     * Note: Has effect only in Vaadin 24.1+
+     * 
+     * @param padding
+     *            boolean
+     */
+    public void setPadding(boolean padding) {
+        if (padding) {
+            addThemeName("badge");
+        } else {
+            removeThemeName("badge");
         }
     }
 
