@@ -75,6 +75,7 @@ public class Badge extends Component implements HasTheme, HasTooltip {
      */
     public void setText(String text) {
         this.text = text;
+        getElement().removeAllChildren();
         add(new Span(text));
     }
 
