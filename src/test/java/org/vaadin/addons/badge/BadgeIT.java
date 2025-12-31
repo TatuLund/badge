@@ -13,12 +13,17 @@ import com.vaadin.testbench.screenshot.ImageFileUtil;
 
 public class BadgeIT extends AbstractViewTest {
 
+    public BadgeIT() {
+        super("");
+    }
+
     @Override
     public void setup() throws Exception {
         super.setup();
 
         // Hide dev mode gizmo, it would interfere screenshot tests
         $("vaadin-dev-tools").first().setProperty("hidden", true);
+        $("copilot-main").first().setProperty("hidden", true);
     }
 
     @Test

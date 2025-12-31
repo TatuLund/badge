@@ -1,5 +1,5 @@
 import { ThemableMixin } from '@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js';
-import { badge } from '@vaadin/vaadin-lumo-styles/badge.js';
+import badge from '@vaadin/vaadin-lumo-styles/src/global/badge.css?inline';
 import { html, LitElement, } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { TooltipController } from '@vaadin/component-base/src/tooltip-controller.js';
@@ -15,7 +15,7 @@ export class Badge extends ThemableMixin(LitElement) {
   }
 
   static get styles() {
-	return badge.styleSheet;
+	  return badge;
   }
 
   _tooltipController : TooltipController | undefined;
@@ -34,7 +34,7 @@ export class Badge extends ThemableMixin(LitElement) {
 		<span theme='badge ${this.theme}' part='badge'>
 			<slot name='content'></slot>
 		</span>
-		<slot name='tooltip''></slot>
+		<slot name='tooltip'></slot>
 	`;
   }
 }

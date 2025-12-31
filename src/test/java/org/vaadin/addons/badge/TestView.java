@@ -14,8 +14,7 @@ import com.vaadin.flow.router.Route;
  * test folder will not be included in the final JAR.
  */
 @Route("")
-@CssImport("./styles.css")
-public class TestView extends VerticalLayout implements AppShellConfigurator {
+public class TestView extends VerticalLayout {
 
     public TestView() {
         add(createBadges("", false, null));

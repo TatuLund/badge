@@ -4,7 +4,6 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasTheme;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
@@ -16,8 +15,7 @@ import com.vaadin.flow.component.shared.HasTooltip;
  * 
  * @author Tatu Lund
  */
-@JsModule("@vaadin/vaadin-lumo-styles/badge.js")
-@JsModule("./badge.ts")
+@JsModule("./src/badge/badge.ts")
 @Tag("tatus-badge")
 public class Badge extends Component implements HasTheme, HasTooltip {
 
