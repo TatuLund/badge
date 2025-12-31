@@ -31,29 +31,29 @@ public class BadgeIT extends AbstractViewTest {
         BadgeElement badge = $(BadgeElement.class).first();
         SpanElement internalSpan = badge.$(SpanElement.class).first();
         Assert.assertEquals("text",internalSpan.getText());
-        Assert.assertTrue(internalSpan.getAttribute("theme").contains("badge"));
+        Assert.assertTrue(internalSpan.getDomAttribute("theme").contains("badge"));
         badge = $(BadgeElement.class).all().get(1);
         internalSpan = badge.$(SpanElement.class).first();
-        Assert.assertTrue(internalSpan.getAttribute("theme").contains("success"));
+        Assert.assertTrue(internalSpan.getDomAttribute("theme").contains("success"));
         badge = $(BadgeElement.class).all().get(2);
         internalSpan = badge.$(SpanElement.class).first();
-        Assert.assertTrue(internalSpan.getAttribute("theme").contains("error"));
-        badge = $(BadgeElement.class).all().get(3);
-        internalSpan = badge.$(SpanElement.class).first();
-        Assert.assertTrue(internalSpan.getAttribute("theme").contains("contrast"));
+        Assert.assertTrue(internalSpan.getDomAttribute("theme").contains("error"));
         badge = $(BadgeElement.class).all().get(4);
         internalSpan = badge.$(SpanElement.class).first();
-        Assert.assertTrue(internalSpan.getAttribute("theme").contains("primary"));
-        badge = $(BadgeElement.class).all().get(8);
+        Assert.assertTrue(internalSpan.getDomAttribute("theme").contains("contrast"));
+        badge = $(BadgeElement.class).all().get(5);
         internalSpan = badge.$(SpanElement.class).first();
-        Assert.assertTrue(internalSpan.getAttribute("theme").contains("pill"));
-        badge = $(BadgeElement.class).all().get(12);
+        Assert.assertTrue(internalSpan.getDomAttribute("theme").contains("primary"));
+        badge = $(BadgeElement.class).all().get(10);
         internalSpan = badge.$(SpanElement.class).first();
-        Assert.assertTrue(internalSpan.getAttribute("theme").contains("small"));
-        badge = $(BadgeElement.class).all().get(20);
+        Assert.assertTrue(internalSpan.getDomAttribute("theme").contains("pill"));
+        badge = $(BadgeElement.class).all().get(15);
+        internalSpan = badge.$(SpanElement.class).first();
+        Assert.assertTrue(internalSpan.getDomAttribute("theme").contains("small"));
+        badge = $(BadgeElement.class).all().get(25);
         TestBenchElement icon = badge.$("vaadin-icon").first();
-        Assert.assertEquals("lumo:clock",icon.getAttribute("icon"));
-        badge = $(BadgeElement.class).all().get(40);
+        Assert.assertEquals("lumo:clock",icon.getDomAttribute("icon"));
+        badge = $(BadgeElement.class).all().get(55);
         DivElement htmlDiv = badge.$(DivElement.class).first();
         Assert.assertEquals("bold",htmlDiv.getText());
         Assert.assertEquals("700",htmlDiv.getCssValue("font-weight"));
@@ -64,9 +64,11 @@ public class BadgeIT extends AbstractViewTest {
         BadgeElement badge = $(BadgeElement.class).first();
         Actions action = new Actions(getDriver());
         action.moveToElement(badge).perform();
-        TestBenchElement tooltip = $("vaadin-tooltip-overlay").first();
+        TestBenchElement tooltip = badge.$("vaadin-tooltip").first();
+        waitUntil(driver -> tooltip.getDomAttribute("opened") != null);
+        Assert.assertNotNull(tooltip.getDomAttribute("opened"));
         Assert.assertEquals("Correct tooltip was not found",
-                "normal text", tooltip.getText());
+                "normal  text", tooltip.getText());
     }
 
     @Test
